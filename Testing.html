@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Ahlan Salati</h1>
+  <h2>This is a quick application to add prayer times to you calander</h2>
+  <p>The main influence behind this project is to help muslims stay on their deen while working in corporate America</p>
+  <button type="button" onclick="getLocation()">Grab My Location</button>
+  <button type="button" onclick="calander()">Get My File </button>
+  <p id="demo"></p>
+  <p id="demo2"></p>
+
+
+  <script>
+    async function apiCall(long,lat) {
+      document.getElementById("demo").innerHTML = "Fucker";
+    
+      let myObject = await fetch('https://api.pray.zone/v2/times/this_month.json?longitude='+lat+'&latitude='+long);
+      let myText = await myObject.text();
+    
+      document.getElementById("demo2").innerHTML = myText;
+    
+    }
+    
+  </script>
+
+<script>
+  var x = document.getElementById("demo");
+  
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+      x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+  }
+  
+  function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;
+  }
+  </script>
+</body>
+</html>
