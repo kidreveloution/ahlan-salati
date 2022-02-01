@@ -1,14 +1,19 @@
-from fastapi import FastAPI, File, UploadFile
-import shutil
+from typing import Optional
 
-docHeaderAPI = FastAPI()
-
-
-@docHeaderAPI.get("/")
-async def root():
-    return {"message": "Hello World"}
+from fastapi import FastAPI
+from pydantic import BaseModel
 
 
+class Item(BaseModel):
+    name: str
+    description: Optional[str] = None
+    price: float
+    tax: Optional[float] = None
 
-@docHeaderAPI.post("/getsalat/lat:{lat}&long:{long}")
-async def getsalat(lat,long):
+
+app = FastAPI()
+
+
+@app.post("/items/")
+async def create_item(item: Item):
+    return item
