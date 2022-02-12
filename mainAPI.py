@@ -5,12 +5,6 @@ from pydantic import BaseModel
 from main import mainFunc
 from fastapi.responses import FileResponse
 
-class Item(BaseModel):
-    name: str
-    description: Optional[str] = None
-    price: float
-    tax: Optional[float] = None
-
 
 app = FastAPI()
 
