@@ -1,7 +1,9 @@
+import imp
 from typing import Optional
 from fastapi import FastAPI
 from pydantic import BaseModel
-
+from main import mainFunc
+from fastapi.responses import FileResponse
 
 class Item(BaseModel):
     name: str
@@ -13,6 +15,7 @@ class Item(BaseModel):
 app = FastAPI()
 
 
-@app.post("/items/")
-async def create_item(item: Item):
-    return item
+@app.post("/latLong/")
+async def read_item(lat: int,long:int):
+    mainFunc(lat,long)
+    return FileResponse("myics.ics")
