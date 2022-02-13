@@ -1,0 +1,1 @@
+{"id":"5e9c0878-e05f-4858-aaeb-96a102d1e278","space":17032,"runtime":"python3.9","name":"SalatiAPI","path":"pvng8j","project":"b06dkyg3","account":"144798365827","region":"us-east-1","deps":["fastAPI","requests"],"envs":null,"public":true,"log_level":"debug","cron":""}
