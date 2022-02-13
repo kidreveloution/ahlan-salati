@@ -15,7 +15,7 @@ def createEvent(name,day,time,f):
     else:
         tempEnd = str(tempEnd)
     tempEnd = checkMinutes(tempEnd)
-    print(tempEnd)
+    #print(tempEnd)
 
 
     beginEvent = str(trueDay)+str("T")+str(prayerTime)
@@ -26,8 +26,9 @@ def createEvent(name,day,time,f):
 
 def checkMinutes(tempEnd):
     tempMinute = list(tempEnd)
+    #print(tempMinute)
     if  tempMinute[2] == '6':
-        print("Function was used")
+        #print("Function was used")
         tempMinute[2] = '0'
         tempMinute[1] = str(int(tempMinute[1])+1)    
     tempMinute = "".join(tempMinute)
@@ -67,10 +68,11 @@ def getCalander(jsonFile,f):
         createEvent("Asr",day,asr,f)
         createEvent("Maghrib",day,maghrib,f)
         createEvent("Isha",day,isha,f)
+        #print(day,fajr,dhuhr,asr,maghrib,isha)
 
 
 def mainFunc(lat, long):
-    f = open("myics.ics", "w")
+    f = open("/tmp/mySalat.ics", "w")
     f.write("\nBEGIN:VCALENDAR\n")
     cal = getSalat(lat, long, f)
     f.write("\nEND:VCALENDAR\n")
@@ -78,8 +80,8 @@ def mainFunc(lat, long):
 
 #testing area
 if __name__ == "__main__":
-    f = open("myics.ics", "w")
-    f.write("\nBEGIN:VCALENDAR\n")
+    f = open("/tmp/mySalat.ics", "w")
+    f.write("BEGIN:VCALENDAR\n")
     cal = getSalat(-83,42,f)
     f.write("\nEND:VCALENDAR\n")
 
