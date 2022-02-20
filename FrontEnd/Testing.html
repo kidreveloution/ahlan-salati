@@ -48,13 +48,13 @@
 
     x.innerHTML = "Latitude: " + lat + 
     "<br>Longitude: " + long;
-    apiCalls(long,lat)
+    apiCalls(lat,long)
 
   }
   </script>
 
 <script>
-    async function apiCalls(long,lat) {
+    async function apiCalls(lat,long) {
 
   fetch('https://pvng8j.deta.dev/latLong/?lat='+lat+'&long='+long)
   .then(resp => resp.blob())
