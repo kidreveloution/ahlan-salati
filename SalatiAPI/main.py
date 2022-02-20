@@ -10,7 +10,7 @@ app = FastAPI()
 
 origins = [
     "file:///C:/Users/aladdin/Desktop/ahlan-salati/FrontEnd/Testing.html"
-    " http://192.168.50.189:8080",
+    "http://192.168.50.189:8080",
     "http://127.0.0.1:8080"
 ]
 
