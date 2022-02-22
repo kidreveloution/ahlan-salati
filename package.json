@@ -19,14 +19,10 @@
   "devDependencies": {
     "git-scripts": "^0.4.3",
     "surge": "^0.23.1"
+  },
+  "git": {
+    "scripts": {
+      "pre-push": "surge --project ./ --domain https://ahlan-salati.surge.sh/"
+    }
   }
-  "devDependencies": {
-  "surge": "latest",
-  "git-scripts": "0.2.1"
-},
-"git": {
-  "scripts": {
-    "pre-push": "surge --project ./ --domain https://ahlan-salati.surge.sh/"
-  }
-}
 }
