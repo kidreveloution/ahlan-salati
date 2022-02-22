@@ -74,13 +74,14 @@ def getCalander(jsonFile,f):
 def mainFunc(lat, long):
     f = open("/tmp/mySalat.ics", "w")
     f.write("\nBEGIN:VCALENDAR\n")
-    cal = getSalat(lat, long, f)
+    cal = getSalat(long, lat, f)
     f.write("\nEND:VCALENDAR\n")
 
 
 #testing area
 if __name__ == "__main__":
-    f = open("/tmp/mySalat.ics", "w")
+    f = open("myics.ics", "w")
+    print("Initiate Testing")
     f.write("BEGIN:VCALENDAR\n")
     cal = getSalat(-83,42,f)
     f.write("\nEND:VCALENDAR\n")
