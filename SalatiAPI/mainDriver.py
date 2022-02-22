@@ -84,6 +84,7 @@ if __name__ == "__main__":
     print("Initiate Testing")
     f.write("BEGIN:VCALENDAR\n")
     cal = getSalat(-83,42,f)
+
     f.write("\nEND:VCALENDAR\n")
 
 #mainFunc(-83,42)
