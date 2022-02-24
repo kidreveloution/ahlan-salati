@@ -18,7 +18,15 @@ h2 {
   margin: 4px 2px;
 }
 
+p {
+  color: black;
+  text-align: left;
+}
 
+h1 {
+    color:#04AA6D;
+    text-align: left;
+}
 
 .round10 {border-radius: 10px;}
 .button2 {border-radius: 4px;}
