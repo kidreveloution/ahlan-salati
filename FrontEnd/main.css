@@ -1,9 +1,14 @@
 body {
     font-family: monospace;
+    text-align: left;
+
 }
 
 h2 {
+
     font-family: helvetica;
+    text-align: left;
+
 }
 
  .button {
@@ -14,6 +19,8 @@ h2 {
   text-align: center;
   text-decoration: none;
   display: inline-block;
+  text-align: left;
+
   font-size: 16px;
   margin: 4px 2px;
 }
@@ -24,6 +31,7 @@ p {
 }
 
 h1 {
+    padding-top: 50px;
     color:#04AA6D;
     text-align: left;
 }
