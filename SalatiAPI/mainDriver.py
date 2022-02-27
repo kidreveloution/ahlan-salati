@@ -73,7 +73,7 @@ def getCalander(jsonFile,f):
 
 def mainFunc(lat, long):
     f = open("/tmp/mySalat.ics", "w")
-    f.write("\nBEGIN:VCALENDAR\n")
+    f.write("BEGIN:VCALENDAR\n")
     cal = getSalat(long, lat, f)
     f.write("\nEND:VCALENDAR\n")
 
