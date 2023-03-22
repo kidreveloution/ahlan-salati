@@ -9,19 +9,20 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 origins = [
-    "file:///C:/Users/aladdin/Desktop/ahlan-salati/FrontEnd/Testing.html"
     "http://192.168.50.189:8080",
     "http://127.0.0.1:8080",
     "https://ahlan-salati.surge.sh/",
-    "https://ahlan-salati.surge.sh"
+    "https://ahlan-salati.surge.sh",
+    "http://localhost:3000",
+    "*"
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"],
+    allow_headers=["*"]
 )
 
 @app.get("/")

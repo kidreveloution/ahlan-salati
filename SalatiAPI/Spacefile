@@ -5,3 +5,8 @@ micros:
     src: .
     engine: python3.9
     primary: true
+    public_routes:
+      - "/latLong/"
+      - "/latLong"
+      - "/docs"
+      - "/*"
