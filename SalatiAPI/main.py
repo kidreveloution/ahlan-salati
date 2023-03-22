@@ -30,6 +30,6 @@ async def read_item():
 
 
 @app.get("/latLong/")
-async def read_item(lat: float,long:float):
-    mainFunc(lat,long)
+async def read_item(lat: float,long:float,days:int):
+    mainFunc(lat,long,days)
     return FileResponse ("/tmp/mySalat.ics",media_type="mySalat/ics",filename="mySalat.ics")

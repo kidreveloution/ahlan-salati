@@ -1,9 +1,13 @@
 import requests
-
+import datetime
 #Given the location, this file spits out the .ics file.
 
 def createEvent(name,day,time,f):
-    trueDay = day.replace('-','')
+    dayStrip = datetime.datetime.strptime(day, '%d-%m-%Y')
+    day = dayStrip.strftime("%d")
+    month = dayStrip.strftime("%m")
+    year = dayStrip.strftime("%Y")
+
     prayerTime = int(time.replace(':',''))
 
     prayerTime = str(check24(prayerTime))
@@ -17,12 +21,11 @@ def createEvent(name,day,time,f):
     tempEnd = checkMinutes(tempEnd)
     #print(tempEnd)
 
+    beginEvent = str(year)+str(month)+str(day)+str("T")+str(prayerTime)
+    endEvent = str(year)+str(month)+str(day)+str("T")+str(tempEnd)
 
-    beginEvent = str(trueDay)+str("T")+str(prayerTime)
-    endEvent = str(trueDay)+str("T")+str(tempEnd)
     eventString = "\nBEGIN:VEVENT\nDTSTART:"+beginEvent+"\nSUMMARY:"+name+"\nDESCRIPTION:"+"\nDTEND:"+endEvent+"\nEND:VEVENT\n"
     f.write(eventString)
-    #print(eventString)
 
 def checkMinutes(tempEnd):
     tempMinute = list(tempEnd)
@@ -34,10 +37,14 @@ def checkMinutes(tempEnd):
     tempMinute = "".join(tempMinute)
     return(tempMinute)
 
-def getSalat(lat,long,f):
-    response = requests.get("https://api.pray.zone/v2/times/this_month.json?longitude="+str(lat)+"&latitude="+str(long))
+def getSalat(lat,long,daysToGet,f):
+    today = datetime.date.today()
+
+    year = today.year
+    response = requests.get("http://api.aladhan.com/v1/calendar/"+str(year)+"?latitude="+str(lat)+"&longitude="+str(long)+str("&method=2"))
+
     data = response.json()
-    getCalander(data,f)
+    getCalander(data,daysToGet,f)
 
 def check24(time):
     if time >= 240000:
@@ -53,28 +60,31 @@ def check24(time):
         return(time)
 
 
-def getCalander(jsonFile,f):
-     for x in range(len(jsonFile["results"]["datetime"])):
-    
-        day = jsonFile["results"]["datetime"][x]["date"]["gregorian"]
+def getCalander(jsonFile,daysToGet,f): #need to be able to handle next 30 days from a given point 
+    today = datetime.date.today()
+    for x in range(0,daysToGet): #should not start at 1, should start at the current day
+        date = today + datetime.timedelta(days=x)
+        singluarDay = date.strftime("%d").lstrip("0")
+        month = date.strftime("%m").lstrip("0")
 
-        fajr = jsonFile["results"]["datetime"][x]["times"]["Fajr"]+str(":00")
-        dhuhr = jsonFile["results"]["datetime"][x]["times"]["Dhuhr"] +str(":00")     
-        asr = jsonFile["results"]["datetime"][x]["times"]["Asr"]+str(":00")
-        maghrib = jsonFile["results"]["datetime"][x]["times"]["Maghrib"]+str(":00")
-        isha = jsonFile["results"]["datetime"][x]["times"]["Isha"]+str(":00")
+        day = jsonFile["data"][str(month)][int(singluarDay)-1]["date"]["gregorian"]["date"]
+        prayerDay = jsonFile["data"][str(month)][int(singluarDay)-1]["timings"]
+        fajr = str(prayerDay["Fajr"][:-6]+str(":00"))
+        dhuhr = str(prayerDay["Dhuhr"][:-6] +str(":00"))     
+        asr = str(prayerDay["Asr"][:-6]+str(":00"))
+        maghrib = str(prayerDay["Maghrib"][:-6]+str(":00"))
+        isha = str(prayerDay["Isha"][:-6]+str(":00"))
         createEvent("Fajr",day,fajr,f)
         createEvent("Dhuhr",day,dhuhr,f)
         createEvent("Asr",day,asr,f)
         createEvent("Maghrib",day,maghrib,f)
         createEvent("Isha",day,isha,f)
-        #print(day,fajr,dhuhr,asr,maghrib,isha)
 
 
-def mainFunc(lat, long):
+def mainFunc(lat, long, daysToGet):
     f = open("/tmp/mySalat.ics", "w")
     f.write("BEGIN:VCALENDAR\n")
-    cal = getSalat(long, lat, f)
+    cal = getSalat(long, lat, daysToGet,f)
     f.write("\nEND:VCALENDAR\n")
 
 
@@ -83,7 +93,7 @@ if __name__ == "__main__":
     f = open("myics.ics", "w")
     print("Initiate Testing")
     f.write("BEGIN:VCALENDAR\n")
-    cal = getSalat(-83,42,f)
+    cal = getSalat(42.322140,-83.175941,35)
 
     f.write("\nEND:VCALENDAR\n")
 
