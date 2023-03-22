@@ -1,5 +1,0 @@
-v: 0
-micros:
-  - name: frontend
-    src: ./index.html
-    engine: svelte # or react/vue
