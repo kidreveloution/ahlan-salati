@@ -7,7 +7,7 @@ document.getElementById("downloadBtn").addEventListener("click", async () => {
       const lat = position.coords.latitude;
       const long = position.coords.longitude;
       //https://salatiapi-1-j5004120.deta.app/latLong/?lat=45&long=45&days=32
-      const apiUrl = `https://salatiapi-1-j5004120.deta.app/latLong/?lat=45&long=45&days=32`;
+      const apiUrl = `https://salatiapi-1-j5004120.deta.app/latLong/?lat=${lat}&long=${long}&days=${days}`;
       const response = await fetch(apiUrl);
       const data = await response.text();
   
