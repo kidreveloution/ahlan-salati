@@ -84,7 +84,7 @@ def getCalander(jsonFile,daysToGet,f): #need to be able to handle next 30 days f
 def mainFunc(lat, long, daysToGet):
     f = open("/tmp/mySalat.ics", "w")
     f.write("BEGIN:VCALENDAR\n")
-    cal = getSalat(long, lat, daysToGet,f)
+    getSalat(lat, long, daysToGet,f)
     f.write("\nEND:VCALENDAR\n")
 
 
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     f = open("myics.ics", "w")
     print("Initiate Testing")
     f.write("BEGIN:VCALENDAR\n")
-    cal = getSalat(42.322140,-83.175941,35)
+    cal = getSalat(42.322140,-83.175941,35,f)
 
     f.write("\nEND:VCALENDAR\n")
 
